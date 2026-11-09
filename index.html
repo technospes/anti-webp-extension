@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anti-WebP Image Saver — Save Web Images as Pure PNG Instantly</title>
+  <meta name="description" content="Never suffer another .webp download. Convert any web image into a pristine, lossless PNG or high-quality JPG directly from your browser context menu using OffscreenCanvas.">
+  
+  <!-- Strict Font: Montserrat Only -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- GSAP & Canvas Confetti CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="navbar-wrapper">
+    <nav class="navbar glass-panel">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#brand-indigo)" stroke="#4F46E5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="brand-indigo" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#818CF8"/>
+                <stop offset="1" stop-color="#4F46E5"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-name">
+          <span class="brand-title">Anti-WebP</span>
+          <span class="brand-badge">MV3</span>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#interactive-showcase" class="nav-link">Interactive Demo</a>
+        <a href="#extension-preview" class="nav-link">Popup Preview</a>
+        <a href="#features" class="nav-link">Features</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#install" class="btn btn-primary btn-nav">
+          <span class="btn-icon">⚡</span>
+          <span>Add to Chrome</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero-section" id="interactive-showcase">
+    <div class="hero-container">
+      
+      <!-- Left Column: Bold Headline & Value Proposition -->
+      <div class="hero-content">
+        <div class="pill-announcement glass-panel-sm">
+          <span class="pulse-spark"></span>
+          <span class="pill-text">Manifest V3 Certified • Hardware Accelerated OffscreenCanvas</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Never Suffer Another <br>
+          <span class="gradient-text">.WebP Download</span> <br>
+          Ever Again.
+        </h1>
+
+        <p class="hero-subhead">
+          Say goodbye to broken Photoshop imports, Figma format rejections, and slow online converters. 
+          <strong class="highlight-text">Anti-WebP</strong> silently converts and saves any image on the web as a pure, lossless PNG with one native right-click.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-group">
+          <a href="#install" class="btn btn-primary btn-cta">
+            <span class="btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+            </span>
+            <span>Add to Chrome — It's Free</span>
+            <span class="btn-glow-bar"></span>
+          </a>
+
+          <button type="button" class="btn btn-secondary glass-btn" id="btn-toggle-demo">
+            <span class="play-icon" id="toggle-icon">▶</span>
+            <span id="toggle-label">Play Solution Animation</span>
+          </button>
+        </div>
+
+        <!-- Social Proof & App Compatibility Bar -->
+        <div class="hero-social-proof">
+          <div class="rating-group">
+            <div class="stars">★★★★★</div>
+            <span class="rating-text">4.9/5 from <strong>18,000+</strong> creative pros</span>
+          </div>
+          <div class="compatibility-pill glass-panel-sm">
+            <span class="compat-label">Direct Import Ready For:</span>
+            <div class="app-tags">
+              <span class="app-tag figma">Figma</span>
+              <span class="app-tag photoshop">Photoshop</span>
+              <span class="app-tag illustrator">Illustrator</span>
+              <span class="app-tag discord">Discord</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Mockup Stage (The Problem & Solution Animation) -->
+      <div class="hero-mockup-wrapper">
+        
+        <!-- Interactive Mode Controller Bar -->
+        <div class="demo-controller-bar glass-panel-sm">
+          <button class="mode-tab active" data-mode="solution" id="tab-solution">
+            <span class="tab-indicator"></span>
+            <span class="tab-emoji">✨</span>
+            <span class="tab-title">The Solution (Pure PNG)</span>
+          </button>
+          <button class="mode-tab" data-mode="problem" id="tab-problem">
+            <span class="tab-indicator"></span>
+            <span class="tab-emoji">❌</span>
+            <span class="tab-title">The Problem (.WebP Error)</span>
+          </button>
+          <div class="autoplay-indicator" id="autoplay-indicator" title="Auto-cycling between states">
+            <span class="autoplay-bar" id="autoplay-bar"></span>
+          </div>
+        </div>
+
+        <!-- The 3D Mockup Stage -->
+        <div class="mockup-stage" id="mockup-stage">
+
+          <!-- Orbiting Dribbble-Style UI Widget 1: Speed Benchmark -->
+          <div class="orbit-widget widget-speed glass-panel" id="widget-speed">
+            <div class="widget-header">
+              <div class="widget-icon amber-glow">⚡</div>
+              <div>
+                <div class="widget-title">Zero-Latency Engine</div>
+                <div class="widget-val">0.018s OffscreenCanvas</div>
+              </div>
+            </div>
+            <div class="mini-chart">
+              <span class="bar b1"></span>
+              <span class="bar b2"></span>
+              <span class="bar b3"></span>
+              <span class="bar b4"></span>
+              <span class="bar b5"></span>
+            </div>
+          </div>
+
+          <!-- Orbiting Widget 2: Bell Notification Toast -->
+          <div class="orbit-widget widget-notification glass-panel" id="widget-bell">
+            <div class="bell-icon-wrapper">
+              <span class="bell-dot"></span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+            </div>
+            <div class="widget-text-block">
+              <div class="widget-note-title">Photoshop Alert</div>
+              <div class="widget-note-desc">Imported 4K PNG smoothly!</div>
+            </div>
+          </div>
+
+          <!-- Orbiting Widget 3: Live Community Counter -->
+          <div class="orbit-widget widget-counter glass-panel" id="widget-counter">
+            <div class="avatar-stack">
+              <div class="avatar a1">🎨</div>
+              <div class="avatar a2">⚡</div>
+              <div class="avatar a3">💎</div>
+            </div>
+            <div>
+              <div class="counter-num" id="live-rescue-count">1,842,910</div>
+              <div class="counter-label">WebP images rescued</div>
+            </div>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- STATE 1: THE PROBLEM (Background Mockup)       -->
+          <!-- ============================================== -->
+          <div class="browser-mockup problem-mockup glass-card" id="mockup-problem">
+            <div class="browser-chrome">
+              <div class="window-controls">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="address-bar">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <span>design-inspiration.com/art/masterpiece</span>
+              </div>
+              <div class="status-warning-chip">Standard Browser</div>
+            </div>
+
+            <div class="browser-viewport">
+              <!-- Frustrating WebP Image Preview -->
+              <div class="sample-image-frame problem-bg">
+                <div class="image-overlay-info">
+                  <span class="file-tag error-tag">hero_concept_final.webp</span>
+                </div>
+              </div>
+
+              <!-- Generic Browser Context Menu (Non-nested backdrop) -->
+              <div class="simulated-context-menu generic-menu">
+                <div class="menu-item">Open Image in New Tab</div>
+                <div class="menu-item active-click">
+                  <span>Save Image As...</span>
+                  <span class="subtext">(.webp only)</span>
+                </div>
+                <div class="menu-item">Copy Image Address</div>
+              </div>
+
+              <!-- Photoshop / OS Error Modal -->
+              <div class="error-dialog">
+                <div class="error-icon-box">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <div class="error-body">
+                  <h4 class="error-title">Could not complete your request</h4>
+                  <p class="error-message">
+                    "hero_concept_final.webp" is not the right kind of document. Adobe Photoshop and older tools cannot parse WebP without plugins.
+                  </p>
+                  <div class="error-badges">
+                    <span class="badge-red">Format Not Supported</span>
+                    <span class="badge-gray">Error Code: -50</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Frustration Banner -->
+              <div class="frustration-banner">
+                <span>😤 Result: Forced to use sketchy ad-ridden online converters</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- STATE 2: THE SOLUTION (Foreground Mockup)      -->
+          <!-- ============================================== -->
+          <div class="browser-mockup solution-mockup glass-card active-focus" id="mockup-solution">
+            <div class="browser-chrome">
+              <div class="window-controls">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="address-bar">
+                <span class="lock-icon">🔒</span>
+                <span>design-inspiration.com/art/masterpiece</span>
+              </div>
+              <div class="status-shield-chip">
+                <span class="shield-dot"></span>
+                Anti-WebP Active
+              </div>
+            </div>
+
+            <div class="browser-viewport">
+              <!-- High-res Image Preview -->
+              <div class="sample-image-frame solution-bg">
+                <div class="image-overlay-info">
+                  <span class="file-tag solution-tag">masterpiece_asset_4k.png</span>
+                  <span class="quality-tag">Lossless RGB</span>
+                </div>
+              </div>
+
+              <!-- Sleek Anti-WebP Context Menu (Solid glass-like opaque backdrop, no nested blur) -->
+              <div class="simulated-context-menu solution-menu" id="solution-menu">
+                <div class="menu-item muted">Open Image in New Tab</div>
+                
+                <!-- The Star Action -->
+                <div class="menu-item primary-action-highlight" id="menu-save-action">
+                  <div class="action-left">
+                    <span class="bolt-icon">⚡</span>
+                    <span class="action-name">Save as Pure PNG</span>
+                  </div>
+                  <span class="format-badge-pill">Lossless</span>
+                  <div class="cursor-simulated" id="sim-cursor"></div>
+                </div>
+
+                <div class="menu-item">Save as JPG (Compact)</div>
+                <div class="menu-separator"></div>
+                <div class="menu-item muted">Copy Image</div>
+              </div>
+
+              <!-- Instant Success Badge Popping Up -->
+              <div class="success-pop-badge" id="success-badge">
+                <div class="badge-icon-wrap">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <div class="badge-text">
+                  <div class="badge-title">Saved as Pristine 4K PNG!</div>
+                  <div class="badge-desc">Zero compression artifacts • OffscreenCanvas in 18ms</div>
+                </div>
+                <div class="ready-chips">
+                  <span class="ready-chip">✓ Figma Ready</span>
+                  <span class="ready-chip">✓ Photoshop Ready</span>
+                </div>
+              </div>
+
+              <!-- Download Shelf Simulation -->
+              <div class="sim-download-shelf" id="sim-shelf">
+                <div class="shelf-file-icon">🖼️</div>
+                <div class="shelf-details">
+                  <div class="shelf-filename">masterpiece_asset_4k.png</div>
+                  <div class="shelf-meta">Complete • 3.2 MB • Ready to open</div>
+                </div>
+                <div class="shelf-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- /mockup-stage -->
+
+      </div> <!-- /hero-mockup-wrapper -->
+
+    </div>
+  </main>
+
+  <!-- Interactive Extension Popup Preview Section -->
+  <section class="section-preview" id="extension-preview">
+    <div class="container">
+      <div class="preview-layout">
+        <div class="preview-info">
+          <span class="section-badge">Pixel-Perfect UX</span>
+          <h2 class="section-title">Designed for Serious Creators</h2>
+          <p class="section-desc">
+            No clutter, no bloated tabs, no background battery drain. Anti-WebP stays completely quiet in your browser until you right-click an image. 
+            Customize your default output format and compression with our sleek glassmorphic popup.
+          </p>
+
+          <ul class="feature-bullets">
+            <li>
+              <div class="bullet-icon">⚡</div>
+              <div>
+                <strong>OffscreenCanvas Architecture</strong>
+                <p>Processes megapixel graphics off the main UI thread with zero stutter or lag.</p>
+              </div>
+            </li>
+            <li>
+              <div class="bullet-icon">🔒</div>
+              <div>
+                <strong>100% Client-Side Privacy</strong>
+                <p>Your graphics never touch an external server or API. Safe for client confidentiality.</p>
+              </div>
+            </li>
+            <li>
+              <div class="bullet-icon">🎨</div>
+              <div>
+                <strong>Lossless Alpha Transparency</strong>
+                <p>Preserves crisp transparent backgrounds for icons, cutouts, and UI assets.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Embedded Interactive Popup Simulator -->
+        <div class="preview-simulator">
+          <div class="popup-wrapper-preview">
+            <iframe src="popup.html" title="Anti-WebP Extension Popup Simulator" class="popup-iframe" loading="lazy"></iframe>
+          </div>
+          <div class="simulator-caption">Interactive extension popup preview — try toggling PNG / JPG above!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Grid Section -->
+  <section class="section-features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Why Anti-WebP?</span>
+        <h2 class="section-title">Standard Browser vs. Anti-WebP</h2>
+        <p class="section-desc">Stop dealing with workaround hacks. Fix the WebP problem at the source.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comp-card standard glass-card">
+          <div class="comp-badge bad">Default Browser Way</div>
+          <h3 class="comp-title">The WebP Hassle</h3>
+          <ul class="comp-list">
+            <li><span class="icon-bad">✕</span> Saves images in stubborn <code>.webp</code> or <code>.avif</code></li>
+            <li><span class="icon-bad">✕</span> Fails to open in Photoshop and older editing suites</li>
+            <li><span class="icon-bad">✕</span> Forces you to open ad-filled file converter websites</li>
+            <li><span class="icon-bad">✕</span> Uploads your confidential images to third-party servers</li>
+            <li><span class="icon-bad">✕</span> Wastes 2 to 5 minutes per graphic asset</li>
+          </ul>
+        </div>
+
+        <div class="comp-card anti-webp glass-card featured-glow">
+          <div class="comp-badge good">Anti-WebP Way</div>
+          <h3 class="comp-title">Pure PNG Simplicity</h3>
+          <ul class="comp-list">
+            <li><span class="icon-good">✓</span> 1-click right-click menu: "Save as Pure PNG"</li>
+            <li><span class="icon-good">✓</span> Opens instantly in Figma, Photoshop, Canva, Slack</li>
+            <li><span class="icon-good">✓</span> 0.018-second local conversion with OffscreenCanvas</li>
+            <li><span class="icon-good">✓</span> 100% private — zero bytes leave your machine</li>
+            <li><span class="icon-good">✓</span> Optional custom-quality JPG compression toggle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Install Banner -->
+  <section class="section-cta" id="install">
+    <div class="container">
+      <div class="cta-banner glass-card featured-glow">
+        <div class="cta-content">
+          <h2 class="cta-title">Rescue Your Workflow from .WebP Today</h2>
+          <p class="cta-desc">
+            Install the Manifest V3 extension in 5 seconds. Completely open source, lightweight, and free forever.
+          </p>
+          <div class="cta-actions">
+            <a href="manifest.json" download="manifest.json" class="btn btn-primary btn-cta" id="btn-install-chrome">
+              <span class="btn-icon">⚡</span>
+              <span>Load Unpacked Extension (Developer Mode)</span>
+            </a>
+            <a href="#interactive-showcase" class="btn btn-secondary glass-btn">
+              <span>Back to Interactive Demo</span>
+            </a>
+          </div>
+          <div class="install-instructions">
+            <span>💡 To install: Open <code>chrome://extensions</code> &rarr; Enable <strong>Developer mode</strong> &rarr; Click <strong>Load unpacked</strong> &rarr; Select the <code>extension</code> folder!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand-name">
+          <span class="brand-title">Anti-WebP</span>
+          <span class="brand-badge">Manifest V3</span>
+        </div>
+        <p class="footer-desc">Crafted for designers, developers, and creators who value pure, uncorrupted image formats.</p>
+      </div>
+      <div class="footer-meta">
+        <div>100% Client-Side • OffscreenCanvas Engine • Zero Tracking</div>
+        <div class="copyright">&copy; 2026 Anti-WebP Image Saver. Built with clean glassmorphic design.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

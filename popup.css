@@ -1,0 +1,194 @@
+/* ==========================================================================
+   Anti-WebP Extension Popup — Ultra-Lightweight CSS
+   Theme: Modern Premium SaaS (Electric Indigo + Ultra-Light Slate + Pure White)
+   Strict Rules:
+   - Background: #F8FAFC
+   - Panels: #FFFFFF with 1px border #E2E8F0
+   - Zero backdrop-filter, Zero box-shadow
+   - Active state: #EEF2FF background with #4F46E5 electric indigo text & border
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  width: 300px;
+  background-color: #F8FAFC;
+  font-family: 'Montserrat', sans-serif;
+  color: #0F172A;
+  padding: 14px;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Header */
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-icon {
+  width: 28px;
+  height: 28px;
+  background-color: #EEF2FF;
+  border: 1px solid #C7D2FE;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: -0.3px;
+}
+
+.status-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #4F46E5;
+  background-color: #EEF2FF;
+  border: 1px solid #C7D2FE;
+  padding: 2px 7px;
+  border-radius: 9999px;
+}
+
+/* Main Panel */
+.settings-panel {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #4F46E5;
+}
+
+/* Segmented Pill Control */
+.segmented-control {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.segment-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 7px 10px;
+  border-radius: 9999px;
+  font-family: 'Montserrat', sans-serif;
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.segment-btn .btn-text {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.segment-btn .sub-label {
+  font-size: 9px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* Active State: Electric Indigo tint #EEF2FF background and #4F46E5 text */
+.segment-btn.active {
+  background-color: #EEF2FF;
+  border-color: #C7D2FE;
+  color: #4F46E5;
+}
+
+.segment-btn.active .sub-label {
+  opacity: 1;
+}
+
+/* Quality Slider (JPG only) */
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quality-value {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4F46E5;
+}
+
+.quality-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 9999px;
+  background: #E2E8F0;
+  outline: none;
+  cursor: pointer;
+}
+
+.quality-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #4F46E5;
+  cursor: pointer;
+}
+
+/* Usage Note */
+.usage-note {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: #64748B;
+  text-align: center;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 10px;
+}
+
+.usage-note strong {
+  color: #4F46E5;
+}
