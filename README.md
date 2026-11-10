@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="extension/icons/icon128.png" alt="Anti-WebP Logo" width="96" height="96">
+  <img src="extension/icons/icon128.png" alt="Anti-WebP Logo" width="128" height="96">
 </p>
 
 <h1 align="center">Anti-WebP Image Saver</h1>
