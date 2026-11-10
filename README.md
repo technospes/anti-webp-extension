@@ -1,4 +1,4 @@
-# ⚡ Anti-WebP Image Saver
+![Anti-WebP Hero Banner](extension/icons/icon48.png) # Anti-WebP Image Saver
 
 <!-- 📸 PLACEHOLDER: Insert your 1400x560 Chrome Web Store marquee banner here -->
 ![Anti-WebP Hero Banner](docs/assets/hero-banner.png)
