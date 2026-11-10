@@ -1,18 +1,35 @@
-<h1>
-  <img src="extension/icons/icon48.png" alt="Anti-WebP Logo" width="48" height="48" align="absmiddle">
-  Anti-WebP Image Saver
-</h1>
+<p align="center">
+  <img src="extension/icons/icon128.png" alt="Anti-WebP Logo" width="96" height="96">
+</p>
+
+<h1 align="center">Anti-WebP Image Saver</h1>
+
+<p align="center">
+  <b>Convert <code>.webp</code> and <code>.avif</code> images to lossless PNG or high-quality JPG with a single right-click.</b>
+</p>
+
+<p align="center">
+  A frictionless, Manifest V3-certified browser extension that silently converts frustrating <code>.webp</code> and <code>.avif</code> images into pristine, lossless PNGs or high-quality JPGs with a single right-click.
+</p>
+
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Chrome-Web_Store-4285F4?style=flat&logo=google-chrome&logoColor=white" alt="Chrome Web Store"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Manifest-V3-success" alt="Manifest V3"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+</p>
+
+<p align="center">
+  <a href="#-key-features">🚀 Features</a> •
+  <a href="#-technical-architecture">🧠 Architecture</a> •
+  <a href="#-local-installation-developer-mode">🛠️ Installation</a> •
+  <a href="#-privacy--security">🔒 Privacy</a> •
+  <a href="https://github.com/technospes/anti-webp-extension">📦 View on GitHub</a>
+</p>
+
+---
 
 <!-- 📸 PLACEHOLDER: Insert your 1400x560 Chrome Web Store marquee banner here -->
 ![Anti-WebP Hero Banner](docs/assets/hero-banner.png)
-
-A frictionless, Manifest V3-certified browser extension that silently converts frustrating `.webp` and `.avif` images into pristine, lossless PNGs or high-quality JPGs with a single right-click.
-
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web_Store-4285F4?style=flat&logo=google-chrome&logoColor=white)](#)
-[![Manifest V3](https://img.shields.io/badge/Manifest-V3-success)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
 
 ## 🚀 The Problem vs. The Solution
 
